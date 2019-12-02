@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hood.apps.HoodConfig',
-    'hood',
     'bootstrap3',
     'crispy_forms',
 ]
