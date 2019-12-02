@@ -1,37 +1,74 @@
-<nav class="navbar navbar-inverse navbar-dark role=navigation scrolling-navbar navbar-expand mb-2"
-    style="background-color: rgb(32, 87, 109)">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" style="color: whitesmoke" href="{% url 'home' %}"> Neighbourhood</a>
-        </div>
+{% load bootstrap4 %}
 
-        <div>
-            <button style="background-color: rgb(104, 104, 241)" class="navbar-toggler" type="button"
-                data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                {% if user.is_authenticated %}
-                <div class="navbar-nav mr-auto">
-                    <div style="margin-right: 10px;">
-                        <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search_results' %}">
-                            <input style="height: 32px; text-align: center;" class="form-control " name="search"
-                                type="search" placeholder="Search Business..." aria-label="Search">
-                        </form>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid" id="nav">
+        <div class="topnav" id="nav">
+            <div class="row">
+                <div class="col-md-2">
+                    <div id="main">
+                        <a href="{% url 'home_page' %}">
+                            <img src="../static/images/logo.png" width="30px;" height="30x;" class="img-responsive"
+                                >
+                        </a>
                     </div>
-                    <a style="font-size: 13px; color: whitesmoke" href="{% url 'create-profile' %}">Profile</a>
-                    <a style="font-size: 13px; color: whitesmoke" class="ml-4" href="{% url 'logout' %}">LOGOUT</a>
                 </div>
-                {% else %}
-                <div class="navbar-nav mr-auto">
-                    <a style="font-size: 13px; color: whitesmoke" href="{% url 'login' %}"><i class="mr-1 fa fa-lock"
-                            aria-hidden="true"></i>LOGIN</a>
-                    <a style="font-size: 13px; color: whitesmoke" class="ml-4" href="{% url 'register' %}"><i
-                            class="mr-1 fa fa-star" aria-hidden="true"></i>REGISTER</a>
+                <div class="col-md-4" id="logo">
+                    <a href="{% url 'home_page' %}" style="color:white;"><strong>Neighborhood Watch.</strong></a>
+                </div>
+                <div class="col-md-2" height="5px;" width="10px;">
+                    <form class="navbar-form" role="search" action="">
+                        <input type="text" name="search" placeholder="Search.." id="input">
+                    </form>
+
+                </div>
+
+                <div class="col-md-2" id="drop">
+                    {% if user.is_authenticated %}
+                    <ul class="" style="position:absolute;">
+                        <li class="dropdown btn profile-settings-btn" style="list-style:none;" aria-label="profile settings">
+                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                                aria-expanded="false" style="color:white;"><i class="fa fa-cog" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" style="position: absolute;left: 0px;
+                            top: 0px;
+                            z-index: 1;">
+                                <li>
+                                    <a href="{% url 'home_page' %}">Home</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                                </li>
+                                <li>
+                                    <a href="/accounts/password/change">Change Password</a>
+                                </li>
+                                <li>
+                                    <a href="/logout">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    {% else %}
+                    <li style="list-style: none;">
+                        <a href="/accounts/register/" style="color:white; font-size: 13px;">REGISTER /</a>
+                        <a class='btn btn-default' href="/accounts/login" style="color:white; font-size: 13px;">LOGIN</a>
+                    </li>
+
+                    {% endif %}
+                    {% if data.profile.Profile_photo %}
+                    <img src="{{profile.profile.Profile_photo.url}}" alt="img" width="50px" height="50px ">
+                    <h1 class="profile-user-name" style="font-size: 14px;">{{profile.username}}</h1>
+                    {% endif %}
+                </div>
+                <div class="col-md-2" style="text-align: center; padding-top: 16px; font-size: 13px; color:white;background-color:rgba(0,0,0,0.9); opacity: 0.9;">
+                    <a href="{% url 'add_hood' %}" style="color: white;">ADD NEW HOOD!</a>
                 </div>
             </div>
-            {% endif %}
         </div>
     </div>
-</nav>
+</body>

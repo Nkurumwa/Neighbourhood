@@ -31,12 +31,25 @@ def create_profile(request):
             profile = form.save(commit = False)
             profile.username = current_user
             profile.save()
-        return redirect('/')
+        return redirect('home')
 
     else:
 
         form = ProfileForm()
     return render(request,'user/profile_form.html',{"form":form})
+
+@login_required(login_url='/accounts/login/')
+def profile_edit(request):
+    current_user = request.user
+    if request.method == 'POST':
+        logged_user = Profile.objects.get(prof_user=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=logged_user)
+        if form.is_valid():
+            form.save()
+        return redirect('profile')
+    else:
+        form = ProfileForm()
+    return render(request,'user/profile_form.html',{'form':form})
 
 @login_required
 def home(request):
