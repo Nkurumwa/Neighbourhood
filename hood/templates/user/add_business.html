@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{{ block.super}}
+{% load staticfiles%}
+
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<title>Uploads</title>
+{{form.media}}
+
+
+
+<div class="card mx-auto" style="max-width:50rem; margin-top:50px;">
+  <form action="{%url 'add_business'%}" method="post" enctype="multipart/form-data">
+    <div class="ml-3 mr-3 mt-3">
+        {%csrf_token%}
+        {{ form|crispy }}
+    </div>
+   <div class="mt-3 ml-3 mb-3">
+      <input type="submit" class="btn btn-outline-info btn-lg" value="Add Business">
+   </div>
+  </form>
+</div>
+{% endblock %}
