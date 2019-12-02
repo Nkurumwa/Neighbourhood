@@ -1,31 +1,29 @@
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile, Neighbourhood, Business, Post
+from .models import Business,Profile,NeighborHood,Post,Business,Comment
 
-class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
-
+class BusinessForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = Business
+        exclude = ['user','profile','neighborHood']
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['username']
+        exclude = ['user','neighborhood','business']
 
-class AddHoodForm(forms.ModelForm):
+class HoodForm(forms.ModelForm):
     class Meta:
-        model = Neighbourhood
-        exclude = ['user_profile', 'profile']
+        model = NeighborHood
+        exclude= ['occupants']
 
-class AddBusinessForm(forms.ModelForm):
-    class Meta:
-        model = Business
-        exclude = ['business_owner', 'business_hood']
-
-class AddPostForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        exclude = ['poster', 'post_hood']
+        exclude = ['user','neighborHood','pub_date']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['name']
