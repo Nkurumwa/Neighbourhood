@@ -1,5 +1,5 @@
 from django.contrib import admin
-from watch.models import *
+from hood.models import *
 # Register your models here.
 
 admin.site.register(Business)
