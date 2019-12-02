@@ -1,0 +1,43 @@
+{% extends "registration/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-5">
+            {{form.media}}
+            {% if form.errors %}
+            <p>Please enter correct value</p>
+            {% endif %}
+            <div class="card" style="margin-top:50px;">
+                    <div class="text-center card-header">
+                        <h3>Create Your Profile</h3>
+                    </div>
+                    <div class="card-body">
+                    <div class="">
+                        <form action="{% url 'create-profile' %}" method="post" enctype="multipart/form-data">
+
+                            {% csrf_token%}
+                            {{ form|crispy }}
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-outline-primary login-button" value="Submit">
+
+                            </div>
+                            <input type="hidden" name="next" value="/">
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+
+{% endblock %}
