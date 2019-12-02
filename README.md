@@ -14,4 +14,19 @@
 
 ## BDD
 |User sign up| Login | Post a project|
-|------------------|----------------|---------------|
+|-------------|-----------|----------|
+|User login| Add their neighbourhood| Comment|
+
+## Known bugs
+- Application loads slowly
+
+## Installatiuon
+- Clone the project.
+- Install all requirements.
+- Run it in your local machine
+
+## Contact
+nkurumwa51@gmail.com
+
+## Licence
+[MIT] copyright (Nkurumwa Ishmael)
